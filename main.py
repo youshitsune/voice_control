@@ -41,6 +41,7 @@ def run():
         for i in list(cmd.keys()):
             if sim(i, r) >= 0.6:
                 port.write(cmd[i].encode())
+                break
 
 if __name__ == "__main__":
     run()
