@@ -19,7 +19,7 @@ def sim(a, b):
     return round(r/l, 2)
 
 def record():
-    os.system("arecord audio.mp3 -d 3")
+    os.system("arecord audio.mp3 -d 2")
     audio = whisper.load_audio("audio.mp3")
     audio = whisper.pad_or_trim(audio)
     os.system("rm audio.mp3")
