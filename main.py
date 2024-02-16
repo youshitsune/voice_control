@@ -5,7 +5,7 @@ import time
 
 model = whisper.load_model("small")
 options = whisper.DecodingOptions(fp16=False)
-#port = serial.Serial("/dev/rfcomm0")
+port = serial.Serial("/dev/rfcomm0")
 
 def sim(a, b):
     l = max(len(a), len(b))
