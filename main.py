@@ -5,7 +5,19 @@ import time
 
 model = whisper.load_model("small")
 options = whisper.DecodingOptions(fp16=False)
-port = serial.Serial("/dev/rfcomm0")
+#port = serial.Serial("/dev/rfcomm0")
+
+def sim(a, b):
+    l = max(len(a), len(b))
+    a+=(" "*(l-len(a)))
+    b+=(" "*(l-len(b)))
+    r = 0
+    for i in range(l):
+        if a[i] == b[i]:
+            r+=1
+
+    return round(r/l, 2)
+
 
 def record():
     os.system("arecord audio.mp3 -d 3")
