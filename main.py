@@ -8,8 +8,7 @@ options = whisper.DecodingOptions(fp16=False)
 port = serial.Serial("/dev/rfcomm0")
 
 def sim(a, b):
-    l = max(len(a), len(b))
-    a+=(" "*(l-len(a)))
+    l = len(a)
     b+=(" "*(l-len(b)))
     r = 0
     for i in range(l):
@@ -17,7 +16,6 @@ def sim(a, b):
             r+=1
 
     return round(r/l, 2)
-
 
 def record():
     os.system("arecord audio.mp3 -d 3")
@@ -37,10 +35,9 @@ def stt():
 def run():
     while True:
         r = stt()
-        print(r)
-        if r == "napred":
+        if sim("napred", r) >= 0.6:
             port.write(b"%4#4")
-        elif r == "nazad":
+        elif sim("napred", r) >= 0.6:
             port.write(b"%7#7")
 
 if __name__ == "__main__":
