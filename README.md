@@ -22,6 +22,10 @@ Run script for installing STT model
 python3 get_model.py
 ```
 
+## Configuration
+Before you start using program, you should configure it.
+In *config.json* you write first word for command, then it's value that is sending to robot.
+
 ## Usage
 You first need to bind bluetooth device
 ```bash

@@ -2,6 +2,7 @@ import serial
 import whisper
 import os
 import time
+import json
 
 model = whisper.load_model("small")
 options = whisper.DecodingOptions(fp16=False)
@@ -33,12 +34,13 @@ def stt():
 
     
 def run():
+    with open("config.json", "r") as f:
+        cmd = json.loads(f.read())["commands"]
     while True:
         r = stt()
-        if sim("napred", r) >= 0.6:
-            port.write(b"%4#4")
-        elif sim("napred", r) >= 0.6:
-            port.write(b"%7#7")
+        for i in list(cmd.keys()):
+            if sim(i, r) >= 0.6:
+                port.write(cmd[i].encode())
 
 if __name__ == "__main__":
     run()
